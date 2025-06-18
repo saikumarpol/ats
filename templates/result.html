@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="text-center my-5">
+            <h1>Your Resume Analysis</h1>
+            <h3>ATS Score: <span class="badge bg-primary">{{ score }}/100</span></h3>
+        </header>
+
+        <div class="card shadow p-4 mb-4">
+            <h4>Score Breakdown</h4>
+            <ul class="list-group">
+                {% for category, detail in feedback.items() %}
+                    <li class="list-group-item">{{ category }}: {{ detail }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if suggestions %}
+        <div class="card shadow p-4 mb-4">
+            <h4>Suggestions for Improvement</h4>
+            <ul>
+                {% for suggestion in suggestions %}
+                    <li>{{ suggestion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <a href="/" class="btn btn-primary w-100">Upload Another Resume</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
